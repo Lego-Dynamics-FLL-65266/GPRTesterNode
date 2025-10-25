@@ -178,7 +178,7 @@
       const maxRollDeg = 35; // bank left/right with x
       const maxPitchDeg = 25; // nose up/down with z
       const smoothing = 0.12; // lerp factor per frame
-      const camDist = 350; // camera height above model
+      const camDist = 250; // camera height above model
       const modelScale = 0.005; // scale after normalize=true
 
       const sketch = (p) => {
@@ -188,8 +188,8 @@
         };
 
         p.setup = () => {
-          const w = 420,
-            h = 420;
+          const w = 220,
+            h = 220;
           const cnv = p.createCanvas(w, h, p.WEBGL);
           cnv.parent("droneCanvas");
 
