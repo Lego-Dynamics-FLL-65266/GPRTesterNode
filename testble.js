@@ -15,6 +15,9 @@ noble.on("stateChange", (state) => {
 });
 
 noble.on("discover", (peripheral) => {
+  if (peripheral.advertisement.localName == "") {
+    console.log("so u found a device with no name huh");
+  }
   console.log(`Found device: ${peripheral.advertisement.localName}`);
 
   noble.stopScanning();
