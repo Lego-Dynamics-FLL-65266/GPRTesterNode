@@ -25,6 +25,12 @@ function createWindows() {
 
   visualizerWindow.loadFile("main.html");
   joystickWindow.loadFile("joystick.html");
+  visualizerWindow.on("closed", () => {
+    app.quit();
+  });
+  joystickWindow.on("closed", () => {
+    app.quit();
+  });
 }
 
 app.whenReady().then(() => {
