@@ -1,32 +1,44 @@
-# Arduino Sketch – FLL Innovation Project
+# GPR Simulation – FLL Innovation Project
 
 ## Overview
-This Arduino sketch is for the Lego Dynamics FIRST LEGO League (FLL) Team #65266's Innovation Project, for the season UNEARTHED, Project D.A.R.T.A. It reads motion data from an MPU6050 (GY-521) sensor and outputs movement deltas that simulate directional control. The data is sent over BLE to be interpreted by an Electron + Node.js GPR simulation.
+This is the simulation component of the Lego Dynamics FIRST LEGO League (FLL) Team #65266's Innovation Project for the 2025–2026 season, UNEARTHED. The simulation, part of Project D.A.R.T.A., is built using Electron and Node.js. It receives motion delta data from an Arduino-based BLE device and visualizes directional movement in a virtual environment, simulating a ground-penetrating radar (GPR) system.
 
 ## Features
-- Reads acceleration and gyroscope data from the MPU6050
-- Calculates delta movement values
-- Outputs formatted data over Serial/BLE
-- Designed for integration with external visualization or simulation systems
+- Electron-based desktop application
+- Receives BLE or Serial data from an Arduino device
+- Parses and interprets delta movement commands
+- Visualizes movement in a 3D or 2D simulation space
+- Supports smoothing, decay, and joystick-like control modes
 
-## Example Output
+## Expected Input Format
+The simulation expects data in the following format:
 dX=45,dY=-30
-dX=0,dY=0
-dX=-20,dY=15
-## Dependencies
-- `Wire.h` (I2C communication)
-- `MPU6050.h` or `Adafruit_MPU6050.h` depending on your library choice
+Where:
+- `dX` = delta movement along the X-axis
+- `dY` = delta movement along the Z-axis (mapped to forward/backward)
 
-## Upload Instructions
-1. Connect your Arduino board via USB
-2. Open the sketch in Arduino IDE
-3. Select the correct board and port
-4. Upload the sketch
-5. Open Serial Monitor at 115200 baud to view output
+## Technologies Used
+- [Electron](https://www.electronjs.org/) – for cross-platform desktop app
+- [Node.js](https://nodejs.org/) – backend logic and BLE communication
+- [p5.js](https://p5js.org/) – for WebGL rendering and GPU acceleration
+- [noble-winrt]([https://serialport.io/](https://github.com/Timeular/noble-winrt)) – for BLE data parsing
+
+
+## Setup Instructions
+1. Clone this repository
+2. Run `npm install` to install dependencies
+3. Start the app with `npm run start`
+4. Ensure your Arduino device is powered and transmitting BLE data
+5. The simulation window will open and begin visualizing movement
+
+## Development Notes
+- BLE data is parsed in `main.js`
+- Visualization logic is handled in `visualizer.js` (or similar)
+- Movement smoothing and decay can be toggled via `doPostProcess` flag
 
 ## License
 MIT License — feel free to use, modify, and build upon this project.
 
 ---
 
-Made by our FLL team
+Made by the Lego Dynamics FLL Team #65266
