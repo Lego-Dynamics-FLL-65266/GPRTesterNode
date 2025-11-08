@@ -76,10 +76,12 @@
       <!-- Serial buttons removed -->
       <button id="simulateBtn">Simulate</button>
       <button id="switchFreqBtn">Switch frequencies</button>
+      <button id="restartBleBtn">Restart BLE</button>
       <div>
         <input id="manualInput" placeholder="UP/DOWN/LEFT/RIGHT or (x,y,z)" />
         <button id="sendManual">Send</button>
       </div>
+
       <!-- Serial status removed -->
       <div id="lastCmd">Input: —</div>
       <div id="log"></div>
@@ -188,6 +190,7 @@
     <script>
       // --- Electron IPC ---
       let ipcRenderer;
+
       try {
         ipcRenderer = require("electron").ipcRenderer;
       } catch (e) {}
@@ -209,7 +212,9 @@
           }
         });
       }
-
+      document.getElementById("restartBleBtn").onclick = () => {
+        ipcRenderer.send("restartBleProcess");
+      };
       // --- UI Logging ---
       function log(msg) {
         const el = document.createElement("div");
@@ -237,6 +242,7 @@
       function handleCommand(cmd) {
         if (!cmd) return;
         document.getElementById("lastCmd").textContent = "Last: " + cmd;
+        console.log("Command received:", cmd);
 
         let dx = 0,
           dz = 0;

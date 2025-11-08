@@ -1,5 +1,5 @@
 const noble = require("noble-winrt");
-
+const { ipcRenderer, ipcMain } = require("electron");
 const SERVICE_UUID = "4fafc201-1fb5-459e-8fcc-c5c9c331914b";
 const CHARACTERISTIC_UUID = "beb5483e-36e1-4688-b7f5-ea07361b26a8";
 
@@ -92,8 +92,11 @@ noble.on("discover", (peripheral) => {
 
         console.log("Waiting for data...");
         characteristic.on("data", (data, isNotification) => {
-          const number = data.readUInt32LE(0);
-          console.log("Received:", number);
+          const message = data.toString("utf8");
+          console.log("Received data:", message);
+          if (process.send) {
+            process.send({ type: "vectorCommand", payload: message });
+          }
         });
       }
     );

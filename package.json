@@ -11,6 +11,7 @@
   "license": "ISC",
   "devDependencies": {
     "@abandonware/noble": "^1.9.2-26",
+    "concurrently": "^9.2.1",
     "electron": "^38.2.0"
   },
   "dependencies": {
